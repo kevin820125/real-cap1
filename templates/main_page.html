@@ -1,0 +1,86 @@
+{%extends 'base.html'%}
+{% block title %}main{% endblock %}
+{%block content%}
+<div class="container pt-3">
+    <form class="d-flex" method = 'POST' action = '/search'>
+        <input class="form-control me-2" name = 'search' placeholder="Search Cocktails!" aria-label="Search">
+        <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
+        <button class = 'btn btn-outline-success'>Search!</button>
+    </form>
+</div>
+
+<h2 class = ' fs-2 text-center mt-3 mb-3'>Today Suggestion Cocktails!</h2>
+<div class = 'container'>
+  <div id="cock" class="row">
+
+  </div>
+
+</div>
+
+
+<h2 class = 'text-center display-3 mt-3 mb-2'>5 Main Spirit</h2>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div>Gin</div>
+      <li class = 'spirit'><a href = "/sprit/gin"><img src="https://www.thecocktaildb.com/images/ingredients/gin-Small.png" alt = "gin"></a></li>
+    </div>
+    <div class="col">
+      <div>Rum</div>
+      <li class = 'spirit'><a href = "/sprit/rum"><img src="https://www.thecocktaildb.com/images/ingredients/rum-Small.png" alt = "rum"></a></li>
+    </div>
+    <div class="col">
+      <div>Whiskey</div>
+      <li class = 'spirit'><a href="/sprit/whiskey"><img src="https://www.thecocktaildb.com/images/ingredients/whiskey-Small.png" alt = "whiskey"></a></li>
+    </div>
+    <div class="col">
+      <div>Vodka</div>
+          <li class = 'spirit'><a href = "/sprit/vodka"><img src="https://www.thecocktaildb.com/images/ingredients/vodka-Small.png" alt = "vodka"></a></li>
+    </div>
+    <div class="col">
+      <div>Tequila</div>
+      <li class = 'spirit'><a href="/sprit/tequila"><img src="https://www.thecocktaildb.com/images/ingredients/Tequila-Small.png" alt = "tequila" ></a></li>
+    </div>
+  </div>
+</div>
+
+
+<footer>
+
+  <div class= 'container'></div>
+    <blockquote>
+      We may never know precisely when the first cocktail was made or who invented it, and for a long time, the etymology of the term used to describe it—in the words of H. L. Mencken (who did extensive research on the topic but in the end came up short)—was “quite as dark as the origin of the thing itself.”
+    </blockquote>
+  </div>
+</footer>
+
+
+<script>
+  myStorage = window.sessionStorage;
+  if(myStorage.length != 0 ){
+    for(let i = 0 ; i < 6 ; i++){
+      name = sessionStorage.getItem(`cocktail_name${i}`)
+      url = sessionStorage.getItem(`cock_url${i}`)
+      namediv = document.createElement('div')
+
+      namediv.className = "col-6 col-sm-3 mx-auto"
+      namediv.style = 'width: 200px;'
+      photodiv = document.createElement('div')
+      a = document.createElement('a')
+      a.href = `/cocktail/${name}`
+      img = document.createElement('img')
+      img.src = url
+      img.className =' img-fluid mx-auto'
+      a.append(img)
+      namediv.append(a)
+      photodiv.append(name)
+      cock.append(namediv)
+      namediv.append(photodiv)
+      console.log(url)
+      console.log(name)}  }else{
+    window.onload = function(){
+    showRecipe()
+    }
+  }
+</script>
+{%endblock%}

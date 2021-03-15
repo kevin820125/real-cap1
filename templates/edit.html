@@ -1,0 +1,22 @@
+{%extends 'base.html'%}
+{% block title %}Edit{% endblock %}
+{%block content%}
+  <div class="container">
+
+    <h2 class="join-message fw-bold fs-1 pt-4">edit your profile</h2>
+    <div class="mb-3 row">
+        <form method="POST" id="edit_form">
+            {{ form.hidden_tag() }}
+      
+            {% for field in form if field.widget.input_type != 'hidden' %}
+              {% for error in field.errors %}
+                <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+              <br>
+              {{ field(placeholder=field.label.text, class=" form-control") }}
+            {% endfor %}
+            <br>
+            <button class="btn btn-primary btn-lg btn-block">Sign me up!</button>
+            <a href="/profile" class="btn btn-primary btn-lg btn-block">Goback!</a>
+  </div>
+{%endblock%}

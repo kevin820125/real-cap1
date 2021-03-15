@@ -1,0 +1,51 @@
+{%extends 'base.html'%}
+{% block title %}cocktail{% endblock %}
+{%block content%}
+<h1>{{name}}</h1>
+
+<img src="{{data.strDrinkThumb}}" alt="" style  = 'width:200px;height:200px'>
+{%for i in range(1 , 16)%}
+{%if data['strIngredient'+i|string]%}
+<div>
+{{data['strIngredient' + i|string]}}: {%if not data['strMeasure' + i | string]%}Random{%else%}{{data['strMeasure' + i | string]}}{%endif%}
+</div>
+{%endif%}
+{%endfor%}
+<div >
+    Suggest glass type : <span  id =glassType>{{data.strGlass}}</span>
+</div>
+<div>
+    Category : {{data.strCategory}}
+</div>
+<div>
+    Instruction : {{data.strInstructions}}
+</div>
+
+{%if user%}
+    {%if data['idDrink']|int  in favs%}
+    <button class = 'btn btn-danger' id = 'favorite-cocktail' cockid = '{{data['idDrink']}}'>Unfavorite</button>
+    {%else%}
+    <button class = 'btn btn-success' id = 'favorite-cocktail' cockid = '{{data['idDrink']}}'>Add to favorite</button>
+    {%endif%}
+{%endif%}
+<hr>
+<div class="container">
+    <h2 class = 'text-center'>Similar Cocktails!</h2>
+    <div class="row align-items-start" id = 'recommanded'>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    window.onload = function(){
+        showSimilarCocktail()}
+</script>
+
+{%endblock%}
+
+
+
+
